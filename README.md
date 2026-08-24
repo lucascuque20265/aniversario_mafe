@@ -1,4 +1,4 @@
-# Convite Digital — Beatriz 18 Anos
+# Convite Digital — Mafe 18 Anos
 
 Convite interativo em HTML puro, pronto para deploy estático.
 
@@ -71,10 +71,10 @@ Abra o `index.html` e localize as seções abaixo para editar:
 
 | O que alterar | Onde encontrar no código |
 |---|---|
-| Nome da aniversariante | Buscar por `Beatriz` |
-| Data do evento | Buscar por `2025-12-14` |
-| Horário | Buscar por `13h00` |
-| Local e endereço | Buscar por `Espaço Villa Nobre` |
+| Nome da aniversariante | Buscar por `Mafe` |
+| Data do evento | Buscar por `2026-11-08` |
+| Horário | Buscar por `13h às 22h` |
+| Local e endereço | Buscar pelo link do Google Maps |
 | Número do WhatsApp | Buscar por `5511999999999` |
 | Nome da família | Buscar por `Família Silva` |
 | Música de fundo | Tag `<audio>` — substituir o `src` |
