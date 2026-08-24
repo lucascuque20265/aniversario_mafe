@@ -339,6 +339,25 @@
   #dots.show { opacity:1; }
   .dot { width:5px; height:5px; border-radius:50%; background:rgba(245,240,240,.2); transition:background .4s ease, transform .4s ease; cursor:pointer; }
   .dot.active { background:var(--red); transform:scale(1.4); box-shadow:0 0 6px var(--red-glow); }
+  #nav-arrows { position:fixed; inset:0; z-index:49; pointer-events:none; opacity:0; transition:opacity .5s ease; }
+  #nav-arrows.show { opacity:1; }
+  .nav-arrow {
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:3rem; height:3rem; display:flex; align-items:center; justify-content:center;
+    border:1px solid rgba(245,240,240,.22); border-radius:50%;
+    background:rgba(8,6,8,.48); color:var(--silver-light);
+    font-family:'Montserrat',sans-serif; font-size:1.7rem; font-weight:200; line-height:1;
+    cursor:pointer; pointer-events:all; transition:background .2s ease, border-color .2s ease, transform .2s ease;
+  }
+  .nav-arrow:hover { background:rgba(192,0,26,.5); border-color:rgba(255,77,99,.7); }
+  .nav-arrow:active { transform:translateY(-50%) scale(.92); }
+  .nav-prev { left:1rem; }
+  .nav-next { right:1rem; }
+  @media (max-width:480px) {
+    .nav-arrow { width:3.25rem; height:3.25rem; }
+    .nav-prev { left:.7rem; }
+    .nav-next { right:.7rem; }
+  }
 
   @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
   @keyframes blink  { 0%,100%{opacity:.4} 50%{opacity:1} }
@@ -454,6 +473,10 @@
   <div class="dot" data-i="3"></div>
   <div class="dot" data-i="4"></div>
 </div>
+<div id="nav-arrows">
+  <button class="nav-arrow nav-prev" type="button" aria-label="Voltar para o slide anterior">‹</button>
+  <button class="nav-arrow nav-next" type="button" aria-label="Avançar para o próximo slide">›</button>
+</div>
 
 <script>
 // ══ PARTÍCULAS ══
@@ -546,6 +569,7 @@ function finishVideo(){
   playMusic();
   videoScreen.classList.add('fade-out');
   document.getElementById('dots').classList.add('show');
+  document.getElementById('nav-arrows').classList.add('show');
   setTimeout(()=>{ videoScreen.style.display='none'; }, 1500);
   showSlide(0);
 }
@@ -560,6 +584,7 @@ function startInvite(){
   if(videoReady){ playVideo(); }
   else {
     document.getElementById('dots').classList.add('show');
+    document.getElementById('nav-arrows').classList.add('show');
     setTimeout(()=>{
       videoScreen.style.opacity='0';
       setTimeout(()=>{ videoScreen.style.display='none'; }, 1000);
@@ -589,8 +614,11 @@ function showSlide(i){
 }
 
 function goNext(){ if(current<slides.length-1){ current++; showSlide(current); } }
+function goPrevious(){ if(current>0){ current--; showSlide(current); } }
 document.getElementById('slides').addEventListener('click', e=>{ if(e.target.closest('.btn')) return; goNext(); });
 dots.forEach(d=>d.addEventListener('click', e=>{ e.stopPropagation(); current=parseInt(d.dataset.i); showSlide(current); }));
+document.querySelector('.nav-prev').addEventListener('click', e=>{ e.stopPropagation(); goPrevious(); });
+document.querySelector('.nav-next').addEventListener('click', e=>{ e.stopPropagation(); goNext(); });
 
 // ══ COUNTDOWN ══
 function updateCD(){
