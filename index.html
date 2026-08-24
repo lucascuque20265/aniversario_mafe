@@ -342,7 +342,7 @@
   #nav-arrows { position:fixed; inset:0; z-index:49; pointer-events:none; opacity:0; transition:opacity .5s ease; }
   #nav-arrows.show { opacity:1; }
   .nav-arrow {
-    position:absolute; top:50%; transform:translateY(-50%);
+    position:absolute; bottom:5.25rem;
     width:3rem; height:3rem; display:flex; align-items:center; justify-content:center;
     border:1px solid rgba(245,240,240,.22); border-radius:50%;
     background:rgba(8,6,8,.48); color:var(--silver-light);
@@ -350,7 +350,7 @@
     cursor:pointer; pointer-events:all; transition:background .2s ease, border-color .2s ease, transform .2s ease;
   }
   .nav-arrow:hover { background:rgba(192,0,26,.5); border-color:rgba(255,77,99,.7); }
-  .nav-arrow:active { transform:translateY(-50%) scale(.92); }
+  .nav-arrow:active { transform:scale(.92); }
   .nav-prev { left:1rem; }
   .nav-next { right:1rem; }
   @media (max-width:480px) {
