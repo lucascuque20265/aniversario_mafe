@@ -633,9 +633,29 @@ updateCD(); setInterval(updateCD,1000);
 
 // ══ CALENDÁRIO ══
 function addToCalendar(){
-  const t=encodeURIComponent('Aniversário de 18 Anos - Mafe');
-  const l=encodeURIComponent('https://maps.app.goo.gl/ZhMqYcfqzvfRUes76');
-  window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${t}&dates=20261108T130000/20261108T220000&location=${l}`,'_blank');
+  const escapeIcs = value => value.replace(/[\\;,]/g, match => `\\${match}`).replace(/\n/g, '\\n');
+  const event = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Convite Mafe//PT-BR',
+    'BEGIN:VEVENT',
+    'UID:mafe-18-anos-20261108@convite',
+    'DTSTAMP:20260824T000000Z',
+    'DTSTART:20261108T130000',
+    'DTEND:20261108T220000',
+    `SUMMARY:${escapeIcs('Aniversário de 18 Anos - Mafe')}`,
+    `LOCATION:${escapeIcs('Friends Space')}`,
+    `DESCRIPTION:${escapeIcs('Piscina disponível. Mapa: https://maps.app.goo.gl/ZhMqYcfqzvfRUes76')}`,
+    'URL:https://maps.app.goo.gl/ZhMqYcfqzvfRUes76',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\\r\\n');
+  const url = URL.createObjectURL(new Blob([event], {type:'text/calendar;charset=utf-8'}));
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'aniversario-mafe.ics';
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 </script>
 </body>
